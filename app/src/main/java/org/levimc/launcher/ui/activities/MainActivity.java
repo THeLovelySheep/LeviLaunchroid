@@ -370,12 +370,6 @@ import java.util.concurrent.Executors;
             return;
         }
 
-        if (!PlayStoreValidator.isMinecraftFromPlayStore(this)) {
-            binding.launchButton.setEnabled(true);
-            PlayStoreValidationDialog.showNotFromPlayStoreDialog(this);
-            return;
-        }
-
         new Thread(() -> {
             try {
                 minecraftLauncher.launch(getIntent(), version);
