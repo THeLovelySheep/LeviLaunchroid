@@ -18,12 +18,6 @@ class GamePackageManager private constructor(private val context: Context, priva
     private val nativeLibDir: String
     private val applicationInfo: ApplicationInfo
 
-    private val knownPackages = arrayOf(
-        "com.mojang.minecraftpe",
-        "com.mojang.minecraftpe.beta",
-        "com.mojang.minecraftpe.preview"
-    )
-
     private val requiredLibs = arrayOf(
         "libc++_shared.so",
         "libfmod.so",
@@ -56,9 +50,13 @@ class GamePackageManager private constructor(private val context: Context, priva
         setupSecurityProvider()
     }
 
-    private fun detectGamePackage(): String? {
-        return knownPackages.firstOrNull { isPackageInstalled(it) }
-    }
+private fun detectGamePackage(): String? {
+    val installedPackages = context.packageManager.getInstalledPackages(0)
+    return installedPackages.firstOrNull { pkg ->
+        pkg.packageName.contains("mojang", ignoreCase = true) || 
+        pkg.packageName.contains("minecraft", ignoreCase = true)
+    }?.packageName
+}
 
     private fun isPackageInstalled(packageName: String): Boolean {
         return try {
