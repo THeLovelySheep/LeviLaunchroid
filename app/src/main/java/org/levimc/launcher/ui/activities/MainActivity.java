@@ -37,7 +37,6 @@ import org.levimc.launcher.ui.animation.AnimationHelper;
 import org.levimc.launcher.ui.animation.DynamicAnim;
 import org.levimc.launcher.ui.dialogs.CustomAlertDialog;
 import org.levimc.launcher.ui.dialogs.GameVersionSelectDialog;
-import org.levimc.launcher.ui.dialogs.PlayStoreValidationDialog;
 import org.levimc.launcher.ui.dialogs.SettingsDialog;
 import org.levimc.launcher.ui.dialogs.gameversionselect.BigGroup;
 import org.levimc.launcher.ui.dialogs.gameversionselect.VersionUtil;
