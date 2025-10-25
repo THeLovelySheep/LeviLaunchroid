@@ -18,12 +18,6 @@ class GamePackageManager private constructor(private val context: Context, priva
     private val nativeLibDir: String
     private val applicationInfo: ApplicationInfo
 
-    private val knownPackages = arrayOf(
-        "com.mojang.minecraftpe",
-        "com.mojang.minecraftpe.beta",
-        "com.mojang.minecraftpe.preview"
-    )
-
     private val requiredLibs = arrayOf(
         "libc++_shared.so",
         "libfmod.so",
@@ -58,16 +52,11 @@ class GamePackageManager private constructor(private val context: Context, priva
     }
 
     private fun detectGamePackage(): String? {
-        return knownPackages.firstOrNull { isPackageInstalled(it) }
-    }
-
-    private fun isPackageInstalled(packageName: String): Boolean {
-        return try {
-            context.packageManager.getPackageInfo(packageName, 0)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
-        }
+        val installedPackages = context.packageManager.getInstalledPackages(0)
+        return installedPackages.firstOrNull { packageInfo ->
+            packageInfo.packageName.contains("mojang", ignoreCase = true) || 
+            packageInfo.packageName.contains("minecraft", ignoreCase = true)
+        }?.packageName
     }
 
     private fun resolveNativeLibDir(): String {
