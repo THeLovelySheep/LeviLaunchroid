@@ -27,8 +27,7 @@ class GamePackageManager private constructor(private val context: Context, priva
     )
 
     private val systemLoadedLibs = arrayOf(
-        "libpairipcore.so",
-        "libgxcore.so"
+        "libpairipcore.so"
     )
 
     init {
