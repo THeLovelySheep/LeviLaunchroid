@@ -592,7 +592,6 @@ import okhttp3.OkHttpClient;
         super.onResume();
         setTextMinecraftVersion();
         updateAbiLabel();
-        updateGenuineBadge();
         refreshAccountHeaderUI();
         updateBetaBadge();
         updateDebugBadge();
@@ -615,12 +614,6 @@ import okhttp3.OkHttpClient;
             default -> R.drawable.bg_abi_default;
         };
         abiLabel.setBackgroundResource(bgRes);
-    }
-
-    private void updateGenuineBadge() {
-        if (binding == null) return;
-        boolean verified = PlayStoreValidator.isMinecraftFromPlayStore(this);
-        binding.genuineLabel.setVisibility(verified ? View.GONE : View.VISIBLE);
     }
 
     private void updateBetaBadge() {
@@ -662,11 +655,6 @@ import okhttp3.OkHttpClient;
         DynamicAnim.applyPressScale(binding.settingsButton);
         binding.deleteVersionButton.setOnClickListener(v -> showDeleteVersionDialog());
         DynamicAnim.applyPressScale(binding.deleteVersionButton);
-
-        binding.genuineLabel.setOnClickListener(v -> {
-            PlayStoreValidationDialog.showNotFromPlayStoreDialog(this);
-        });
-        DynamicAnim.applyPressScale(binding.genuineLabel);
 
         initQuickActionsRecycler();
 
